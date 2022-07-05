@@ -1,7 +1,7 @@
-import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import Core from './Core';
 
-const Body = (props) => {
+const Body = () => {
   return (
     <View
       style={styles.container}

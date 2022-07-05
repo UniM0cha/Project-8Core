@@ -2,7 +2,7 @@ import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
 import { Pressable, StyleSheet, View } from 'react-native';
 import { theme } from '../theme';
 
-const NavBar = (props) => {
+const NavBar = () => {
   return (
     <View style={styles.container}>
       <Pressable style={styles.navButton}>

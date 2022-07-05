@@ -1,15 +1,8 @@
-import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
-import {
-  Dimensions,
-  Pressable,
-  ScrollView,
-  StyleSheet,
-  Text,
-} from 'react-native';
+import { ScrollView, StyleSheet } from 'react-native';
 import Body from './Body';
 import Header from './Header';
 
-const Container = (props) => {
+const Container = () => {
   return (
     <ScrollView style={styles.container}>
       <Header />

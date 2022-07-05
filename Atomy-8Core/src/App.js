@@ -1,16 +1,9 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  SafeAreaView,
-  Dimensions,
-  StatusBar,
-} from 'react-native';
-import NavBar from './components/NavBar';
-import Container from './components/Container';
+import { StyleSheet, SafeAreaView, StatusBar } from 'react-native';
 import AppLoading from 'expo-app-loading';
 import { useFonts } from 'expo-font';
 import { theme } from './theme';
+import { NavigationContainer } from '@react-navigation/native';
+import TabNavigation from './navigations/Tab';
 
 export default function App() {
   let [fontsLoaded] = useFonts({
@@ -24,19 +17,8 @@ export default function App() {
   }
 
   return (
-    <SafeAreaView style={styles.container}>
-      <StatusBar />
-      <Container />
-      <NavBar />
-    </SafeAreaView>
+    <NavigationContainer>
+      <TabNavigation />
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: theme.background,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

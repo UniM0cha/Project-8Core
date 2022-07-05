@@ -1,7 +1,7 @@
-import { Pressable, View, StyleSheet, Text } from 'react-native';
+import { View, StyleSheet, Text } from 'react-native';
 import { theme } from '../theme';
 
-const Header = (props) => {
+const Header = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.textYear}>2022년</Text>

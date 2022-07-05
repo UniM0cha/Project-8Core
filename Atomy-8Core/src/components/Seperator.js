@@ -1,6 +1,6 @@
 import { View, StyleSheet } from 'react-native';
 
-const Seperator = (props) => {
+const Seperator = () => {
   return <View style={styles.container}></View>;
 };
 
