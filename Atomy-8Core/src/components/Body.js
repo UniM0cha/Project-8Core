@@ -15,6 +15,7 @@ const Body = () => {
       <Core core={6} />
       <Core core={7} />
       <Core core={8} />
+      {/* <ShareButton /> */}
     </View>
   );
 };
@@ -26,7 +27,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 20,
     paddingTop: 22,
-    justifyContent: 'space-between',
+    paddingBottom: 22,
     // backgroundColor: 'blue',
   },
 });

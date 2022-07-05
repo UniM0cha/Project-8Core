@@ -5,7 +5,7 @@ const Settings = () => {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar />
-      <Text>Profile</Text>
+      <Text>Settings</Text>
     </SafeAreaView>
   );
 };
