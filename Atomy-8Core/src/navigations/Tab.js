@@ -6,6 +6,7 @@ import Main from '../screens/tab/Main';
 import Profile from '../screens/tab/Profile';
 import Settings from '../screens/tab/Settings';
 import { theme } from '../theme';
+import CoreEditStackNavigation from './CoreEditStack';
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -18,7 +19,7 @@ const TabNavigation = () => {
     >
       <Tab.Screen
         name="Main"
-        component={Main}
+        component={CoreEditStackNavigation}
         options={{
           tabBarLabel: '8Core',
           tabBarIcon: (props) => (

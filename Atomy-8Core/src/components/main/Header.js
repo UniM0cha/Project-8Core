@@ -1,5 +1,5 @@
 import { View, StyleSheet, Text } from 'react-native';
-import { theme } from '../theme';
+import { theme } from '../../theme';
 
 const Header = () => {
   return (

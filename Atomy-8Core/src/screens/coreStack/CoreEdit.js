@@ -1,22 +1,19 @@
 import { SafeAreaView, ScrollView, StatusBar, StyleSheet } from 'react-native';
-import Body from '../../components/main/Body';
-import Header from '../../components/main/Header';
+import Body from '../../components/edit/Body';
+import Header from '../../components/edit/Header';
 import { theme } from '../../theme';
 
-const Main = ({ navigation }) => {
+const CoreEdit = () => {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar />
-      {/* <Container navigation={navigation} /> */}
       <ScrollView style={styles.scroll}>
-        <Header />
-        <Body navigation={navigation} />
+        {/* <Header /> */}
+        <Body />
       </ScrollView>
     </SafeAreaView>
   );
 };
-
-export default Main;
 
 const styles = StyleSheet.create({
   container: {
@@ -31,3 +28,5 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
   },
 });
+
+export default CoreEdit;

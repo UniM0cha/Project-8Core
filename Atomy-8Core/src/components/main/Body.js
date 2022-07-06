@@ -1,20 +1,20 @@
 import { StyleSheet, View } from 'react-native';
 import Core from './Core';
 
-const Body = () => {
+const Body = ({ navigation }) => {
   return (
     <View
       style={styles.container}
       // contentContainerStyle={styles.contentContainer}
     >
-      <Core core={1} />
-      <Core core={2} />
-      <Core core={3} />
-      <Core core={4} />
-      <Core core={5} />
-      <Core core={6} />
-      <Core core={7} />
-      <Core core={8} />
+      <Core core={1} navigation={navigation} />
+      <Core core={2} navigation={navigation} />
+      <Core core={3} navigation={navigation} />
+      <Core core={4} navigation={navigation} />
+      <Core core={5} navigation={navigation} />
+      <Core core={6} navigation={navigation} />
+      <Core core={7} navigation={navigation} />
+      <Core core={8} navigation={navigation} />
       {/* <ShareButton /> */}
     </View>
   );
