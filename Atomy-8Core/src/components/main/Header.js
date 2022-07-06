@@ -1,11 +1,17 @@
+import { useContext } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
+import DateContext from '../../contexts/DateContext';
 import { theme } from '../../theme';
 
 const Header = () => {
+  const { date } = useContext(DateContext);
+
   return (
     <View style={styles.container}>
-      <Text style={styles.textYear}>2022년</Text>
-      <Text style={styles.textDay}>7월 2일</Text>
+      <Text style={styles.textYear}>{date.getFullYear() + '년'}</Text>
+      <Text style={styles.textDay}>
+        {date.getMonth() + 1 + '월 ' + date.getDate() + '일'}
+      </Text>
     </View>
   );
 };
