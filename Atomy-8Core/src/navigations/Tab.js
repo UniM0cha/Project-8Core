@@ -1,8 +1,6 @@
 import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import Calender from '../screens/tab/Calender';
-import Main from '../screens/tab/Main';
 import Profile from '../screens/tab/Profile';
 import Settings from '../screens/tab/Settings';
 import { theme } from '../theme';

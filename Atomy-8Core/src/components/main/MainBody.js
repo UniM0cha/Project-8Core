@@ -5,7 +5,6 @@ import { StyleSheet, View } from 'react-native';
 import DateContext from '../../contexts/DateContext';
 import Loading from '../Loading';
 import Core from './MainCore';
-import ShareButton from './ShareButton';
 
 const STORAGE_KEY = '@Cores';
 

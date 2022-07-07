@@ -27,29 +27,7 @@ const Main = ({ navigation }) => {
 
   const onCapture = async () => {
     const uri = await getPhotoUri();
-
     await Sharing.shareAsync(uri);
-  };
-
-  const hasAndroidPermission = async () => {
-    const permission = PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE;
-
-    const hasPermission = await PermissionsAndroid.check(permission);
-    if (hasPermission) {
-      return true;
-    }
-
-    const status = await PermissionsAndroid.request(permission);
-    return status === 'granted';
-  };
-
-  const onSave = async () => {
-    if (Platform.OS === 'android' && !(await hasAndroidPermission())) {
-      console.log('갤러리 접근 권한 없음');
-      return;
-    }
-
-    const uri = await getPhotoUri();
   };
 
   return (
@@ -84,7 +62,6 @@ const styles = StyleSheet.create({
   scroll: {
     flex: 1,
     width: '100%',
-    // paddingVertical: 16,
     backgroundColor: theme.background,
   },
 });

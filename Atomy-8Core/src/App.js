@@ -1,10 +1,7 @@
-import { StyleSheet, SafeAreaView, StatusBar } from 'react-native';
 import AppLoading from 'expo-app-loading';
 import { useFonts } from 'expo-font';
-import { theme } from './theme';
 import { NavigationContainer } from '@react-navigation/native';
 import TabNavigation from './navigations/Tab';
-import CoreEditStackNavigation from './navigations/CoreEditStack';
 
 export default function App() {
   let [fontsLoaded] = useFonts({

@@ -1,4 +1,4 @@
-import { SafeAreaView, StatusBar, StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView, StatusBar, StyleSheet, Text } from 'react-native';
 import { theme } from '../../theme';
 
 const Settings = () => {
