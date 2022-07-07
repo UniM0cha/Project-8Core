@@ -78,7 +78,6 @@ const Body = ({ navigation }) => {
         navigation={navigation}
         data={dates[date] ? dates[date][8] : null}
       />
-      <ShareButton />
     </View>
   ) : (
     <Loading />
@@ -92,7 +91,6 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 20,
     paddingTop: 22,
-    paddingBottom: 22,
-    // backgroundColor: 'blue',
+    paddingBottom: 0,
   },
 });

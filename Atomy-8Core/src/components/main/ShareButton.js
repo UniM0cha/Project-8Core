@@ -1,26 +1,23 @@
-import {
-  Button,
-  Platform,
-  Pressable,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { Platform, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { theme } from '../../theme';
 import { EvilIcons } from '@expo/vector-icons';
 
-const ShareButton = () => {
+const ShareButton = ({ onPress }) => {
   return (
     <View style={styles.container}>
-      <TouchableOpacity>
-        <View style={styles.button}>
+      <View style={styles.button}>
+        <TouchableOpacity
+          onPress={() => {
+            onPress();
+          }}
+        >
           {Platform.OS == 'ios' ? (
             <EvilIcons name="share-apple" size={35} color="black" />
           ) : (
             <EvilIcons name="share-google" size={35} color="black" />
           )}
-        </View>
-      </TouchableOpacity>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };

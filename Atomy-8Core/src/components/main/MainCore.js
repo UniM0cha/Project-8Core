@@ -20,7 +20,7 @@ const Core = ({ core, navigation, data }) => {
       <TouchableOpacity onPress={onPress}>
         <View style={styles.header}>
           <Text style={styles.textCoreHeader}>{selectCore(core)}</Text>
-          <Checkbox value={true} />
+          <Checkbox value={true} onValueChange={onPress} />
         </View>
 
         <Seperator />
@@ -36,7 +36,7 @@ const Core = ({ core, navigation, data }) => {
       <TouchableOpacity onPress={onPress}>
         <View style={styles.header}>
           <Text style={styles.textCoreHeader}>{selectCore(core)}</Text>
-          <Checkbox value={false} />
+          <Checkbox value={false} onValueChange={onPress} />
         </View>
       </TouchableOpacity>
     </View>
