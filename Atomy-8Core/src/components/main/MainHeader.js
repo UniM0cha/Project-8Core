@@ -8,9 +8,9 @@ const Header = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.textYear}>{date.getFullYear() + '년'}</Text>
+      <Text style={styles.textYear}>{date.getFullYear()}년</Text>
       <Text style={styles.textDay}>
-        {date.getMonth() + 1 + '월 ' + date.getDate() + '일'}
+        {date.getMonth() + 1}월 {date.getDate()}일
       </Text>
     </View>
   );

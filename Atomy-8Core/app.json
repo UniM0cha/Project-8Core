@@ -24,7 +24,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.solst_ice.Atomy8Core"
     },
     "web": {
       "favicon": "./assets/favicon.png"
