@@ -5,7 +5,7 @@ const Settings = () => {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar />
-      <Text>Settings</Text>
+      <Text>현재 페이지는 준비중입니다.</Text>
     </SafeAreaView>
   );
 };

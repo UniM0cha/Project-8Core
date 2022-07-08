@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "Atomy-8Core",
+    "name": "8 Core",
     "slug": "Atomy-8Core",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -18,7 +18,8 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.solstice.8core"
     },
     "android": {
       "adaptiveIcon": {
@@ -29,6 +30,8 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "description": "",
+    "githubUrl": "https://github.com/UniM0cha/Project-8Core"
   }
 }

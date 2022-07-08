@@ -1,7 +1,7 @@
-import AppLoading from 'expo-app-loading';
 import { useFonts } from 'expo-font';
 import { NavigationContainer } from '@react-navigation/native';
 import TabNavigation from './navigations/Tab';
+import Loading from './components/Loading';
 
 export default function App() {
   let [fontsLoaded] = useFonts({
@@ -11,7 +11,7 @@ export default function App() {
   });
 
   if (!fontsLoaded) {
-    return <AppLoading />;
+    return <Loading />;
   }
 
   return (
