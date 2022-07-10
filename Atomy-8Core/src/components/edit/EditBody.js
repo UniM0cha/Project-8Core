@@ -1,6 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useContext, useEffect, useState } from 'react';
 import { Button, StyleSheet, TextInput, View } from 'react-native';
+import { Shadow } from 'react-native-shadow-2';
 import DateContext from '../../contexts/DateContext';
 import { theme } from '../../theme';
 import Loading from '../Loading';
@@ -18,12 +19,10 @@ const Body = ({ navigation, route }) => {
 
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
-  // const [dates, setDates] = useState({});
   const [ready, setReady] = useState(false);
 
   // 처음 화면 표시 시에 MainCore로부터 가져온 title과 content를 적용한다.
   useEffect(() => {
-    // loadDates();
     setTitle(routeTitle);
     setContent(routeContent);
     setReady(true);
@@ -75,7 +74,7 @@ const Body = ({ navigation, route }) => {
 
   return ready ? (
     <View style={styles.container}>
-      <View style={styles.coreContainer}>
+      <Shadow viewStyle={styles.coreContainer}>
         <TextInput
           style={styles.textInputTitle}
           placeholder="제목을 입력해주세요."
@@ -92,7 +91,7 @@ const Body = ({ navigation, route }) => {
           onChangeText={(text) => setContent(text)}
           value={content}
         />
-      </View>
+      </Shadow>
       <Button title="저장" onPress={addCores} />
     </View>
   ) : (
@@ -114,17 +113,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 22,
     paddingVertical: 20,
     marginBottom: 17,
-    // margin: 10,
-
-    // ios 그림자
-    shadowOpacity: 0.2,
-    shadowColor: 'black',
-    shadowOpacity: 0.2,
-    shadowRadius: 8,
-    shadowOffset: { height: 0, width: 0 },
-
-    // 안드로이드 그림자
-    elevation: 5,
+    width: '100%',
   },
   textInputTitle: {
     backgroundColor: theme.textInput,

@@ -1,15 +1,6 @@
 import { useRef } from 'react';
-import {
-  CameraRoll,
-  PermissionsAndroid,
-  Platform,
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  ToastAndroid,
-} from 'react-native';
-import ViewShot from 'react-native-view-shot';
+import { SafeAreaView, ScrollView, StatusBar, StyleSheet } from 'react-native';
+import ViewShot, { captureRef } from 'react-native-view-shot';
 import Body from '../../components/main/MainBody';
 import Header from '../../components/main/MainHeader';
 import ShareButton from '../../components/main/ShareButton';
@@ -18,10 +9,13 @@ import { theme } from '../../theme';
 import * as Sharing from 'expo-sharing';
 
 const Main = ({ navigation }) => {
-  const captureRef = useRef();
+  const viewshotRef = useRef();
 
   const getPhotoUri = async () => {
-    const uri = await captureRef.current.capture();
+    const uri = await captureRef(viewshotRef, {
+      format: 'jpg',
+      quality: 0.8,
+    });
     return `file://${uri}`;
   };
 
@@ -36,11 +30,7 @@ const Main = ({ navigation }) => {
         <StatusBar />
         <ScrollView style={styles.scroll}>
           {/* 캡쳐할 부분 시작*/}
-          <ViewShot
-            ref={captureRef}
-            options={{ format: 'jpg' }}
-            style={{ backgroundColor: 'white' }}
-          >
+          <ViewShot ref={viewshotRef} style={styles.viewshot}>
             <Header />
             <Body navigation={navigation} />
           </ViewShot>
@@ -63,6 +53,10 @@ const styles = StyleSheet.create({
     flex: 1,
     width: '100%',
     backgroundColor: theme.background,
+  },
+  viewshot: {
+    backgroundColor: theme.background,
+    elevation: 0,
   },
 });
 

@@ -1,14 +1,9 @@
 import Checkbox from 'expo-checkbox';
-import {
-  View,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  Platform,
-} from 'react-native';
+import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import selectCore from '../../functions/selectCore';
 import Seperator from '../Seperator';
 import PropTypes from 'prop-types';
+import { Shadow } from 'react-native-shadow-2';
 
 const Core = ({ core, navigation, data }) => {
   // 코어를 선택할 때 CoreEdit으로 제목과 내용을 전달하며 이동한다.
@@ -24,7 +19,7 @@ const Core = ({ core, navigation, data }) => {
   return data &&
     ((data.title && data.title != '') ||
       (data.content && data.content != '')) ? (
-    <View style={styles.container}>
+    <Shadow viewStyle={styles.container} startColor="#00000015">
       <TouchableOpacity onPress={onPress}>
         <View style={styles.header}>
           <Text style={styles.textCoreHeader}>{selectCore(core)}</Text>
@@ -38,16 +33,16 @@ const Core = ({ core, navigation, data }) => {
           <Text style={styles.textContent}>{data.content}</Text>
         ) : null}
       </TouchableOpacity>
-    </View>
+    </Shadow>
   ) : (
-    <View style={styles.container}>
+    <Shadow viewStyle={styles.container} startColor="#00000015">
       <TouchableOpacity onPress={onPress}>
         <View style={styles.header}>
           <Text style={styles.textCoreHeader}>{selectCore(core)}</Text>
           <Checkbox value={false} onValueChange={onPress} />
         </View>
       </TouchableOpacity>
-    </View>
+    </Shadow>
   );
 };
 
@@ -64,19 +59,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 22,
     paddingVertical: 11,
     marginBottom: 17,
-
-    ...Platform.select({
-      ios: {
-        shadowOpacity: 0.2,
-        shadowColor: 'black',
-        shadowOpacity: 0.2,
-        shadowRadius: 8,
-        shadowOffset: { height: 0, width: 0 },
-      },
-      android: {
-        elevation: 5,
-      },
-    }),
+    width: '100%',
   },
   header: {
     flexDirection: 'row',
@@ -85,7 +68,6 @@ const styles = StyleSheet.create({
   textCoreHeader: {
     fontFamily: 'Atomy-Bold',
     width: '90%',
-    // paddingHorizontal: 22,
   },
   textTitle: {
     fontFamily: 'Atomy-Medium',
