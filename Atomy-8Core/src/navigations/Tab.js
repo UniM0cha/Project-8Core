@@ -19,7 +19,7 @@ const TabNavigation = () => {
         name="Main"
         component={CoreEditStackNavigation}
         options={{
-          tabBarLabel: '8Core',
+          tabBarLabel: '8코어',
           tabBarIcon: (props) => (
             <MaterialCommunityIcons
               name={props.focused ? 'notebook-edit' : 'notebook-edit-outline'}
