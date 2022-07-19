@@ -12,8 +12,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @RequiredArgsConstructor
+@Slf4j
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
   private final JwtTokenProvider jwtTokenProvider;
@@ -21,24 +23,18 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
   @Override
   protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
       throws ServletException, IOException {
-    try {
-      String jwt = getJwtFromRequest(request); // request에서 jwt 토큰을 꺼낸다.
-      if (jwtTokenProvider.validateToken(jwt)) {
 
-        Authentication authentication = jwtTokenProvider.getAuthentication(jwt); // jwt로부터 Authentication 객체를 받아온다.
-        SecurityContextHolder.getContext().setAuthentication(authentication); // securityContext에 Authentication 등록
+    String jwt = getJwtFromRequest(request); // request에서 jwt 토큰을 꺼낸다.
+    log.info("JWT 추출 완료, token : {}", jwt);
 
-      } else {
-        if (jwt == null) {
-          request.setAttribute("unauthorization", "401 인증키 없음.");
-        }
+    log.info("JWT 값 검증");
+    if (jwtTokenProvider.validateToken(jwt)) {
 
-        if (jwtTokenProvider.validateToken(jwt)) {
-          request.setAttribute("unauthorization", "401-001 인증키 만료.");
-        }
-      }
-    } catch (Exception ex) {
-      logger.error("Could not set user authentication in security context", ex);
+      log.info("JWT 값 검증 완료");
+      Authentication authentication = jwtTokenProvider.getAuthentication(jwt); // jwt로부터 Authentication 객체를 받아온다.
+      SecurityContextHolder.getContext().setAuthentication(authentication); // securityContext에 Authentication 등록
+      log.info("JWT로부터 UserDetails을 Authentication에 등록 완료");
+
     }
 
     filterChain.doFilter(request, response);

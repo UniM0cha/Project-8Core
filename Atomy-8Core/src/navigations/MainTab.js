@@ -1,10 +1,10 @@
 import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import Calender from '../screens/tab/Calender';
-import Profile from '../screens/tab/Profile';
-import Settings from '../screens/tab/Settings';
-import { theme } from '../theme';
 import CoreEditStackNavigation from './CoreEditStack';
+import Calender from '../components/calender/Calender';
+import Profile from '../components/profile/Profile';
+import Settings from '../components/settings/Settings';
+import { theme } from '../theme';
 
 const Tab = createMaterialBottomTabNavigator();
 

@@ -1,7 +1,7 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import selectCore from '../functions/selectCore';
-import CoreEdit from '../screens/coreStack/CoreEdit';
-import Main from '../screens/tab/Main';
+import CoreEdit from '../components/core-edit/CoreEdit';
+import Main from '../components/main/Main';
 import { theme } from '../theme';
 
 const Stack = createStackNavigator();

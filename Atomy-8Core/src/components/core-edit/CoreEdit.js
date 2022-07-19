@@ -1,5 +1,5 @@
 import { SafeAreaView, ScrollView, StatusBar, StyleSheet } from 'react-native';
-import Body from '../../components/edit/EditBody';
+import Body from './EditBody';
 import { DateProvider } from '../../contexts/DateContext';
 import { theme } from '../../theme';
 

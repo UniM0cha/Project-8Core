@@ -1,9 +1,9 @@
 import { useRef } from 'react';
 import { SafeAreaView, ScrollView, StatusBar, StyleSheet } from 'react-native';
 import ViewShot, { captureRef } from 'react-native-view-shot';
-import Body from '../../components/main/MainBody';
-import Header from '../../components/main/MainHeader';
-import ShareButton from '../../components/main/ShareButton';
+import Body from './MainBody';
+import Header from './MainHeader';
+import ShareButton from './ShareButton';
 import { DateProvider } from '../../contexts/DateContext';
 import { theme } from '../../theme';
 import * as Sharing from 'expo-sharing';

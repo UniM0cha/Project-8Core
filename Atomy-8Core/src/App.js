@@ -1,6 +1,6 @@
 import { useFonts } from 'expo-font';
 import { NavigationContainer } from '@react-navigation/native';
-import TabNavigation from './navigations/Tab';
+import TabNavigation from './navigations/MainTab';
 import Loading from './components/Loading';
 
 export default function App() {
