@@ -5,9 +5,7 @@ import { StyleSheet, View } from 'react-native';
 import Loading from '../Loading';
 import Core from './MainCore';
 
-const STORAGE_KEY = '@Cores';
-
-const Body = ({ navigation }) => {
+const Body = () => {
   const [storageKey, setStorageKey] = useState('');
   const [cores, setCores] = useState({});
   const [ready, setReady] = useState(false);
@@ -35,21 +33,19 @@ const Body = ({ navigation }) => {
   // 저장된 데이터를 모두 불러오면 표시한다.
   return ready ? (
     <View style={styles.container}>
-      <Core core={1} navigation={navigation} data={cores ? cores[1] : null} />
-      <Core core={2} navigation={navigation} data={cores ? cores[2] : null} />
-      <Core core={3} navigation={navigation} data={cores ? cores[3] : null} />
-      <Core core={4} navigation={navigation} data={cores ? cores[4] : null} />
-      <Core core={5} navigation={navigation} data={cores ? cores[5] : null} />
-      <Core core={6} navigation={navigation} data={cores ? cores[6] : null} />
-      <Core core={7} navigation={navigation} data={cores ? cores[7] : null} />
-      <Core core={8} navigation={navigation} data={cores ? cores[8] : null} />
+      <Core core={1} data={cores ? cores[1] : null} />
+      <Core core={2} data={cores ? cores[2] : null} />
+      <Core core={3} data={cores ? cores[3] : null} />
+      <Core core={4} data={cores ? cores[4] : null} />
+      <Core core={5} data={cores ? cores[5] : null} />
+      <Core core={6} data={cores ? cores[6] : null} />
+      <Core core={7} data={cores ? cores[7] : null} />
+      <Core core={8} data={cores ? cores[8] : null} />
     </View>
   ) : (
     <Loading />
   );
 };
-
-export default Body;
 
 const styles = StyleSheet.create({
   container: {
@@ -59,3 +55,5 @@ const styles = StyleSheet.create({
     paddingBottom: 0,
   },
 });
+
+export default Body;

@@ -7,7 +7,7 @@ import ShareButton from './ShareButton';
 import { theme } from '../../theme';
 import * as Sharing from 'expo-sharing';
 
-const Main = ({ navigation }) => {
+const Main = () => {
   const viewshotRef = useRef();
 
   const getPhotoUri = async () => {
@@ -30,7 +30,7 @@ const Main = ({ navigation }) => {
         {/* 캡쳐할 부분 시작*/}
         <ViewShot ref={viewshotRef} style={styles.viewshot}>
           <Header />
-          <Body navigation={navigation} />
+          <Body />
         </ViewShot>
         {/* 캡쳐할 부분 끝 */}
         <ShareButton onPress={() => onCapture()} />

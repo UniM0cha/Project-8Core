@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { useEffect, useState } from 'react';
 import { Button, StyleSheet, TextInput, View } from 'react-native';
 import { Shadow } from 'react-native-shadow-2';
@@ -7,18 +7,15 @@ import getTodayString from '../../functions/getTodayString';
 import { theme } from '../../theme';
 import Loading from '../Loading';
 
-// const STORAGE_KEY = '@Cores';
+const Body = () => {
+  const navigation = useNavigation();
+  const route = useRoute();
 
-const Body = ({ route }) => {
   // MainCore로부터 core, title, content를 받아온다.
   const core = route.params.core;
   const routeTitle = route.params.title;
   const routeContent = route.params.content;
 
-  // DateContext로부터 현재 날짜를 가져온다.
-  // const { date } = useContext(DateContext);
-
-  const navigation = useNavigation();
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [ready, setReady] = useState(false);

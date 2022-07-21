@@ -4,8 +4,11 @@ import selectCore from '../../functions/selectCore';
 import Seperator from '../Seperator';
 import PropTypes from 'prop-types';
 import { Shadow } from 'react-native-shadow-2';
+import { useNavigation } from '@react-navigation/native';
 
-const Core = ({ core, navigation, data }) => {
+const Core = ({ core, data }) => {
+  const navigation = useNavigation();
+
   // 코어를 선택할 때 CoreEdit으로 제목과 내용을 전달하며 이동한다.
   const onPress = () => {
     navigation.navigate('CoreEdit', {
@@ -48,7 +51,6 @@ const Core = ({ core, navigation, data }) => {
 
 Core.propTypes = {
   core: PropTypes.number,
-  navigation: PropTypes.object,
   data: PropTypes.object,
 };
 

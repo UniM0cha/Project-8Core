@@ -2,12 +2,12 @@ import { SafeAreaView, ScrollView, StatusBar, StyleSheet } from 'react-native';
 import Body from './EditBody';
 import { theme } from '../../theme';
 
-const CoreEdit = ({ navigation, route }) => {
+const CoreEdit = () => {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar />
       <ScrollView style={styles.scroll}>
-        <Body navigation={navigation} route={route} />
+        <Body />
       </ScrollView>
     </SafeAreaView>
   );
