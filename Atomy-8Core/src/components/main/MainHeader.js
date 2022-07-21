@@ -1,22 +1,33 @@
-import { useContext } from 'react';
+import { useEffect, useState } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
-import DateContext from '../../contexts/DateContext';
 import { theme } from '../../theme';
+import Loading from '../Loading';
 
 const Header = () => {
-  const { date } = useContext(DateContext);
+  const [date, setDate] = useState({});
+  const [ready, setReady] = useState(false);
 
-  return (
+  useEffect(() => {
+    const today = new Date();
+    today.setHours(0);
+    today.setMinutes(0);
+    today.setSeconds(0);
+    today.setMilliseconds(0);
+    setDate(today);
+    setReady(true);
+  }, []);
+
+  return ready ? (
     <View style={styles.container}>
       <Text style={styles.textYear}>{date.getFullYear()}년</Text>
       <Text style={styles.textDay}>
         {date.getMonth() + 1}월 {date.getDate()}일
       </Text>
     </View>
+  ) : (
+    <Loading />
   );
 };
-
-export default Header;
 
 const styles = StyleSheet.create({
   container: {
@@ -35,3 +46,5 @@ const styles = StyleSheet.create({
     color: theme.atomy,
   },
 });
+
+export default Header;

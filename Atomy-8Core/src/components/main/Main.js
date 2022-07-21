@@ -4,7 +4,6 @@ import ViewShot, { captureRef } from 'react-native-view-shot';
 import Body from './MainBody';
 import Header from './MainHeader';
 import ShareButton from './ShareButton';
-import { DateProvider } from '../../contexts/DateContext';
 import { theme } from '../../theme';
 import * as Sharing from 'expo-sharing';
 
@@ -26,18 +25,16 @@ const Main = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <DateProvider>
-        <StatusBar />
-        <ScrollView style={styles.scroll}>
-          {/* 캡쳐할 부분 시작*/}
-          <ViewShot ref={viewshotRef} style={styles.viewshot}>
-            <Header />
-            <Body navigation={navigation} />
-          </ViewShot>
-          {/* 캡쳐할 부분 끝 */}
-          <ShareButton onPress={() => onCapture()} />
-        </ScrollView>
-      </DateProvider>
+      <StatusBar />
+      <ScrollView style={styles.scroll}>
+        {/* 캡쳐할 부분 시작*/}
+        <ViewShot ref={viewshotRef} style={styles.viewshot}>
+          <Header />
+          <Body navigation={navigation} />
+        </ViewShot>
+        {/* 캡쳐할 부분 끝 */}
+        <ShareButton onPress={() => onCapture()} />
+      </ScrollView>
     </SafeAreaView>
   );
 };

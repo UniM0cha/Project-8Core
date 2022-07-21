@@ -1,17 +1,14 @@
 import { SafeAreaView, ScrollView, StatusBar, StyleSheet } from 'react-native';
 import Body from './EditBody';
-import { DateProvider } from '../../contexts/DateContext';
 import { theme } from '../../theme';
 
 const CoreEdit = ({ navigation, route }) => {
   return (
     <SafeAreaView style={styles.container}>
-      <DateProvider>
-        <StatusBar />
-        <ScrollView style={styles.scroll}>
-          <Body navigation={navigation} route={route} />
-        </ScrollView>
-      </DateProvider>
+      <StatusBar />
+      <ScrollView style={styles.scroll}>
+        <Body navigation={navigation} route={route} />
+      </ScrollView>
     </SafeAreaView>
   );
 };
