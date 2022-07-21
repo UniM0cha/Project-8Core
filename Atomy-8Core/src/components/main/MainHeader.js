@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
   },
   textDay: {
     fontFamily: 'Atomy-Bold',
-    fontSize: 48,
+    fontSize: 40,
     color: theme.atomy,
   },
 });
