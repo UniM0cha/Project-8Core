@@ -4,7 +4,7 @@ import { format } from 'date-fns';
 import { useContext, useEffect, useState } from 'react';
 import { Button, StyleSheet, TextInput, View } from 'react-native';
 import { Shadow } from 'react-native-shadow-2';
-import { TodayContext } from '../../App';
+import { TodayContext } from '../../context/TodayContext';
 import { theme } from '../../theme';
 import Loading from '../Loading';
 import { STORAGE_KEY } from '../main/MainBody';

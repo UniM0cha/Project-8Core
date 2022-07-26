@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { Shadow } from 'react-native-shadow-2';
 import { useNavigation } from '@react-navigation/native';
 
-const Core = ({ core, data }) => {
+const Core = ({ core, data, readonly = false }) => {
   const navigation = useNavigation();
 
   // 코어를 선택할 때 CoreEdit으로 제목과 내용을 전달하며 이동한다.
@@ -22,8 +22,9 @@ const Core = ({ core, data }) => {
   return data &&
     ((data.title && data.title != '') ||
       (data.content && data.content != '')) ? (
-    <Shadow viewStyle={styles.container} startColor="#00000015">
-      <TouchableOpacity onPress={onPress}>
+    // readonly 유무 구별
+    readonly ? (
+      <Shadow viewStyle={styles.container} startColor="#00000015">
         <View style={styles.header}>
           <Text style={styles.textCoreHeader}>{selectCore(core)}</Text>
           <Checkbox value={true} onValueChange={onPress} />
@@ -35,7 +36,33 @@ const Core = ({ core, data }) => {
         {data.content ? (
           <Text style={styles.textContent}>{data.content}</Text>
         ) : null}
-      </TouchableOpacity>
+      </Shadow>
+    ) : (
+      <Shadow viewStyle={styles.container} startColor="#00000015">
+        <TouchableOpacity onPress={onPress}>
+          <View style={styles.header}>
+            <Text style={styles.textCoreHeader}>{selectCore(core)}</Text>
+            <Checkbox value={true} onValueChange={onPress} />
+          </View>
+
+          <Seperator />
+
+          {data.title ? (
+            <Text style={styles.textTitle}>{data.title}</Text>
+          ) : null}
+          {data.content ? (
+            <Text style={styles.textContent}>{data.content}</Text>
+          ) : null}
+        </TouchableOpacity>
+      </Shadow>
+    )
+  ) : // readonly 유무 구별
+  readonly ? (
+    <Shadow viewStyle={styles.container} startColor="#00000015">
+      <View style={styles.header}>
+        <Text style={styles.textCoreHeader}>{selectCore(core)}</Text>
+        <Checkbox value={false} onValueChange={onPress} />
+      </View>
     </Shadow>
   ) : (
     <Shadow viewStyle={styles.container} startColor="#00000015">

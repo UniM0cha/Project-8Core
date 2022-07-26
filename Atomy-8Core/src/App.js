@@ -2,9 +2,7 @@ import { useFonts } from 'expo-font';
 import { NavigationContainer } from '@react-navigation/native';
 import TabNavigation from './navigations/MainTab';
 import Loading from './components/Loading';
-import { createContext } from 'react';
-
-export const TodayContext = createContext();
+import { TodayContext } from './context/TodayContext';
 
 export default function App() {
   let [fontsLoaded] = useFonts({
@@ -24,10 +22,10 @@ export default function App() {
   }
 
   return (
-    <NavigationContainer>
-      <TodayContext.Provider value={today}>
+    <TodayContext.Provider value={today}>
+      <NavigationContainer>
         <TabNavigation />
-      </TodayContext.Provider>
-    </NavigationContainer>
+      </NavigationContainer>
+    </TodayContext.Provider>
   );
 }

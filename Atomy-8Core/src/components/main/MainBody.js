@@ -3,7 +3,7 @@ import { useIsFocused } from '@react-navigation/native';
 import { format } from 'date-fns';
 import { useContext, useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { TodayContext } from '../../App';
+import { TodayContext } from '../../context/TodayContext';
 import Loading from '../Loading';
 import Core from './MainCore';
 
