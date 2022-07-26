@@ -1,7 +1,7 @@
 import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import CoreEditStackNavigation from './CoreEditStack';
-import Calender from '../components/calender/Calender';
+import ViewCalendar from '../components/calendar/Calendar';
 import Profile from '../components/profile/Profile';
 import Settings from '../components/settings/Settings';
 import { theme } from '../theme';
@@ -31,7 +31,7 @@ const TabNavigation = () => {
       />
       <Tab.Screen
         name="Calender"
-        component={Calender}
+        component={ViewCalendar}
         options={{
           tabBarLabel: '캘린더',
           tabBarIcon: (props) => (

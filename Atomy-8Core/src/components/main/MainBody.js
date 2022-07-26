@@ -1,21 +1,21 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useIsFocused } from '@react-navigation/native';
-import { useEffect, useState } from 'react';
+import { format } from 'date-fns';
+import { useContext, useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
+import { TodayContext } from '../../App';
 import Loading from '../Loading';
 import Core from './MainCore';
 
+export const STORAGE_KEY = '8CORE';
+
 const Body = () => {
-  const [storageKey, setStorageKey] = useState('');
+  const today = useContext(TodayContext);
+
   const [cores, setCores] = useState({});
   const [ready, setReady] = useState(false);
 
   const isFocused = useIsFocused();
-
-  // 처음 화면이 띄워질 때 날짜 지정
-  useEffect(() => {
-    setStorageKey(getTodayString());
-  }, []);
 
   // 화면으로 포커스가 이동할 때마다 코어들 새로고침
   useEffect(() => {
@@ -23,9 +23,11 @@ const Body = () => {
   }, [isFocused]);
 
   const loadCores = async () => {
-    const s = await AsyncStorage.getItem(storageKey);
+    const s = await AsyncStorage.getItem(STORAGE_KEY);
     if (s) {
-      setCores(JSON.parse(s));
+      setCores(JSON.parse(s)[format(today, 'yyyy-MM-dd')]);
+    } else {
+      setCores({});
     }
     setReady(true);
   };

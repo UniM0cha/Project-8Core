@@ -1,15 +1,19 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation, useRoute } from '@react-navigation/native';
-import { useEffect, useState } from 'react';
+import { format } from 'date-fns';
+import { useContext, useEffect, useState } from 'react';
 import { Button, StyleSheet, TextInput, View } from 'react-native';
 import { Shadow } from 'react-native-shadow-2';
-import getTodayString from '../../functions/getTodayString';
+import { TodayContext } from '../../App';
 import { theme } from '../../theme';
 import Loading from '../Loading';
+import { STORAGE_KEY } from '../main/MainBody';
 
 const Body = () => {
   const navigation = useNavigation();
   const route = useRoute();
+
+  const today = useContext(TodayContext);
 
   // MainCore로부터 core, title, content를 받아온다.
   const core = route.params.core;
@@ -19,46 +23,78 @@ const Body = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [ready, setReady] = useState(false);
-  const [storageKey, setStorageKey] = useState('');
 
   // 처음 화면 표시 시에 MainCore로부터 가져온 title과 content를 적용한다.
   useEffect(() => {
-    setStorageKey(getTodayString());
     setTitle(routeTitle);
     setContent(routeContent);
     setReady(true);
   }, []);
 
   const addCores = async () => {
-    // AsyncStorage에서 dates를 불러온다.
-    const todayCores = await loadTodayCores();
+    // AsyncStorage에서 저장된 날짜들을 불러온다.
+    const dates = await loadDates();
+    const todayString = format(today, 'yyyy-MM-dd');
 
-    // 새로운 코어를 만들고
-    const newCores = Object.assign({}, todayCores, {
-      [core]: {
-        title: title,
-        content: content,
-      },
-    });
+    const cores = dates[todayString] ? dates[todayString] : {};
 
-    // 생성된 코어 저장
-    await saveDates(newCores);
+    // 내용이 존재하면 저장
+    if (!(title == '' && content == '')) {
+      // 새로운 코어를 cores에 추가한다.
+      const newCores = Object.assign({}, cores, {
+        [core]: {
+          title: title,
+          content: content,
+        },
+      });
+
+      // newCores를 dates에 추가한다.
+      const newDates = Object.assign({}, dates, {
+        [todayString]: newCores,
+      });
+
+      await saveDates(newDates);
+    }
+    // 내용이 없으면 삭제
+    else {
+      delete cores[core];
+
+      // cores를 dates에 추가한다.
+      const newDates = Object.assign({}, dates, {
+        [todayString]: cores,
+      });
+
+      console.log(cores);
+
+      // 모든 코어가 없을 경우 dates도 삭제
+      if (Object.keys(cores) == 0) {
+        delete dates[todayString];
+        await saveDates(dates);
+      }
+
+      // 코어가 하나라도 있는 경우에 저장
+      else {
+        await saveDates(newDates);
+      }
+    }
 
     // 8코어 메인화면으로 이동
     navigation.navigate('CoreSelect');
   };
 
   const saveDates = async (toSave) => {
-    await AsyncStorage.setItem(storageKey, JSON.stringify(toSave));
+    await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(toSave));
+    console.log(`saved :`);
+    console.log(toSave);
   };
 
-  // AsyncStorage에서 오늘의 코어 리스트를 받아오는데
-  const loadTodayCores = async () => {
-    const s = await AsyncStorage.getItem(storageKey);
+  // AsyncStorage에서 전체 날짜 리스트를 받아온다.
+  const loadDates = async () => {
+    const s = await AsyncStorage.getItem(STORAGE_KEY);
     if (s) {
       return JSON.parse(s);
     }
-    // 원래 데이터가 없으면 객체를 새로 만든다.
+    // 데이터가 없으면 객체를 새로 만든다.
     else {
       return {};
     }
