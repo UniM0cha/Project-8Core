@@ -94,15 +94,17 @@ const ViewCalendar = () => {
      *  '2022-04-06' : { marked : true },
      * }
      */
-    const keys = Object.keys(dates);
-    setMarkedDates(
-      Object.assign({}, ...keys.map((date) => ({ [date]: { marked: true } })))
-    );
+
+    const newMarkedDates = {};
+    Object.keys(dates).forEach((key) => {
+      newMarkedDates[key] = { marked: true };
+    });
+    setMarkedDates(newMarkedDates);
   };
 
   const buildItems = () => {
     /**
-     * dates를 markDates 형태로 만들어준다.
+     * dates를 itmes 형태로 만들어준다.
      * ['2022-04-05', '2022-04-06']
      * >>>>>>
      * {
@@ -110,17 +112,13 @@ const ViewCalendar = () => {
      *  '2022-04-06' : [{ cores : dates['2022-04-06'] }],
      * }
      */
-    const keys = Object.keys(dates);
-    setItmes(
-      Object.assign(
-        {},
-        ...keys.map((date) => {
-          const data = [];
-          data.push({ cores: dates[date] });
-          return { [date]: data };
-        })
-      )
-    );
+    const newItems = {};
+    Object.keys(dates).forEach((key) => {
+      const data = [];
+      data.push({ cores: dates[key] });
+      newItems[key] = data;
+    });
+    setItmes(newItems);
   };
 
   const renderItem = (item, firstItemInDay) => {
