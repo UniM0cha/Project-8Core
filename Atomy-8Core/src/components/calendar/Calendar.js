@@ -106,13 +106,67 @@ const ViewCalendar = () => {
      * ['2022-04-05', '2022-04-06']
      * >>>>>>
      * {
-     *  '2022-04-05' : [{ data : dates[todayString] }],
-     *  '2022-04-06' : [{ data : dates[todayString] }],
+     *  '2022-04-05' : [{ cores : dates['2022-04-05'] }],
+     *  '2022-04-06' : [{ cores : dates['2022-04-06'] }],
      * }
      */
     const keys = Object.keys(dates);
     setItmes(
-      Object.assign({}, ...keys.map((date) => ({ [date]: { marked: true } })))
+      Object.assign(
+        {},
+        ...keys.map((date) => {
+          const data = [];
+          data.push({ cores: dates[date] });
+          return { [date]: data };
+        })
+      )
+    );
+  };
+
+  const renderItem = (item, firstItemInDay) => {
+    return (
+      <View style={styles.renderItem}>
+        <Core
+          core={1}
+          data={item.cores ? item.cores[1] : null}
+          readonly={true}
+        />
+        <Core
+          core={2}
+          data={item.cores ? item.cores[2] : null}
+          readonly={true}
+        />
+        <Core
+          core={3}
+          data={item.cores ? item.cores[3] : null}
+          readonly={true}
+        />
+        <Core
+          core={4}
+          data={item.cores ? item.cores[4] : null}
+          readonly={true}
+        />
+        <Core
+          core={5}
+          data={item.cores ? item.cores[5] : null}
+          readonly={true}
+        />
+        <Core
+          core={6}
+          data={item.cores ? item.cores[6] : null}
+          readonly={true}
+        />
+        <Core
+          core={7}
+          data={item.cores ? item.cores[7] : null}
+          readonly={true}
+        />
+        <Core
+          core={8}
+          data={item.cores ? item.cores[8] : null}
+          readonly={true}
+        />
+      </View>
     );
   };
 
@@ -138,70 +192,17 @@ const ViewCalendar = () => {
             },
           },
         }}
+        loadItemsForMonth={buildItems}
         markedDates={markedDates}
-        items={{
-          '2022-07-26': [{ cores: dates[todayString] }],
-          '2022-07-23': [{ name: 'item 2 - any js object' }],
-          // '2022-07-24': [],
-          '2022-07-25': [{ name: 'item 3 - any js object' }],
-        }}
-        renderItem={(item, firstItemInDay) => {
-          console.log(item);
-          return (
-            <View style={styles.renderItem}>
-              <Core
-                core={1}
-                data={item.cores ? item.cores[1] : null}
-                readonly={true}
-              />
-              <Core
-                core={2}
-                data={item.cores ? item.cores[2] : null}
-                readonly={true}
-              />
-              <Core
-                core={3}
-                data={item.cores ? item.cores[3] : null}
-                readonly={true}
-              />
-              <Core
-                core={4}
-                data={item.cores ? item.cores[4] : null}
-                readonly={true}
-              />
-              <Core
-                core={5}
-                data={item.cores ? item.cores[5] : null}
-                readonly={true}
-              />
-              <Core
-                core={6}
-                data={item.cores ? item.cores[6] : null}
-                readonly={true}
-              />
-              <Core
-                core={7}
-                data={item.cores ? item.cores[7] : null}
-                readonly={true}
-              />
-              <Core
-                core={8}
-                data={item.cores ? item.cores[8] : null}
-                readonly={true}
-              />
-            </View>
-          );
-        }}
-        // Specify how each date should be rendered. day can be undefined if the item is not first in that day
+        items={items}
+        renderItem={renderItem}
         // renderDay={(day, item) => {
         //   // console.log(day.getDate());
         //   return <Text>{day ? day.getDate() : 'item'}</Text>;
         // }}
-        // // Specify how empty date content with no items should be rendered
         // renderEmptyDate={renderEmptyDate}
-        // Specify what should be rendered instead of ActivityIndicator
         renderEmptyData={renderEmptyData}
-        showOnlySelectedDayItems
+        showOnlySelectedDayItems={true}
       />
     </SafeAreaView>
   );

@@ -79,6 +79,7 @@ const Core = ({ core, data, readonly = false }) => {
 Core.propTypes = {
   core: PropTypes.number,
   data: PropTypes.object,
+  readonly: PropTypes.bool,
 };
 
 const styles = StyleSheet.create({
