@@ -2,7 +2,7 @@
   "expo": {
     "name": "8코어",
     "slug": "Atomy-8Core",
-    "version": "1.0.1",
+    "version": "1.1.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -20,7 +20,7 @@
       "bundleIdentifier": "com.solstice.8core"
     },
     "android": {
-      "versionCode": 2,
+      "versionCode": 4,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
@@ -33,5 +33,9 @@
     },
     "description": "",
     "githubUrl": "https://github.com/UniM0cha/Project-8Core"
+  },
+  "react-native-google-mobile-ads": {
+    "android_app_id": "ca-app-pub-7177226656845371~4987043033",
+    "ios_app_id": "ca-app-pub-7177226656845371~5666248626"
   }
 }
