@@ -25,6 +25,11 @@ const adUnitId = __DEV__
       ios: 'ca-app-pub-7177226656845371~5666248626',
       android: 'ca-app-pub-7177226656845371~4987043033',
     });
+// const adUnitId = Platform.select({
+//   ios: 'ca-app-pub-7177226656845371~5666248626',
+//   android: 'ca-app-pub-7177226656845371~4987043033',
+// });
+// const adUnitId = TestIds.BANNER;
 
 const Main = () => {
   const viewshotRef = useRef();
@@ -53,7 +58,6 @@ const Main = () => {
         </ViewShot>
         {/* 캡쳐할 부분 끝 */}
         <ShareButton onPress={() => onCapture()} />
-        {/* <BannerAd unitId={adUnitId} size={BannerAdSize.FLUID} /> */}
         <View style={styles.ad}>
           <BannerAd unitId={adUnitId} size={BannerAdSize.BANNER} />
         </View>
