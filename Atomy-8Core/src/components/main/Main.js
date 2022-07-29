@@ -13,23 +13,18 @@ import Header from './MainHeader';
 import ShareButton from './ShareButton';
 import { theme } from '../../theme';
 import * as Sharing from 'expo-sharing';
-// import {
-//   BannerAd,
-//   BannerAdSize,
-//   TestIds,
-// } from 'react-native-google-mobile-ads';
+import {
+  BannerAd,
+  BannerAdSize,
+  TestIds,
+} from 'react-native-google-mobile-ads';
 
-// const adUnitId = __DEV__
-//   ? TestIds.BANNER
-//   : Platform.select({
-//       ios: 'ca-app-pub-7177226656845371~5666248626',
-//       android: 'ca-app-pub-7177226656845371~4987043033',
-//     });
-// const adUnitId = Platform.select({
-//   ios: 'ca-app-pub-7177226656845371~5666248626',
-//   android: 'ca-app-pub-7177226656845371~4987043033',
-// });
-// const adUnitId = TestIds.BANNER;
+const adUnitId = __DEV__
+  ? TestIds.BANNER
+  : Platform.select({
+      ios: 'ca-app-pub-7177226656845371/2933124133',
+      android: 'ca-app-pub-7177226656845371/4469567088',
+    });
 
 const Main = () => {
   const viewshotRef = useRef();
@@ -58,9 +53,9 @@ const Main = () => {
         </ViewShot>
         {/* 캡쳐할 부분 끝 */}
         <ShareButton onPress={() => onCapture()} />
-        {/* <View style={styles.ad}>
+        <View style={styles.ad}>
           <BannerAd unitId={adUnitId} size={BannerAdSize.BANNER} />
-        </View> */}
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
