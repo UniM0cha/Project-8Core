@@ -60,17 +60,21 @@ const ViewCalendar = () => {
   const [ready, setReady] = useState(false);
   const [markedDates, setMarkedDates] = useState({});
   const [items, setItmes] = useState({});
-  // const [dates, setDates] = useState({});
+  const [dates, setDates] = useState({});
 
   const isFocused = useIsFocused();
 
-  const loadItemsForMonth = async () => {
-    const dates = await loadDates();
-    console.log(`dates : `);
-    console.log(dates);
-    buildMarkDates(dates);
-    buildItems(dates);
-  };
+  useEffect(() => {
+    async function runAsync() {
+      setDates(await loadDates());
+    }
+    runAsync();
+  }, [isFocused]);
+
+  useEffect(() => {
+    buildMarkDates();
+    buildItems();
+  }, [dates]);
 
   // AsyncStorage에서 전체 날짜 리스트를 받아온다.
   const loadDates = async () => {
@@ -84,7 +88,7 @@ const ViewCalendar = () => {
     }
   };
 
-  const buildMarkDates = (dates) => {
+  const buildMarkDates = () => {
     /**
      * dates를 markDates 형태로 만들어준다.
      * ['2022-04-05', '2022-04-06']
@@ -106,7 +110,7 @@ const ViewCalendar = () => {
     console.log(markedDates);
   };
 
-  const buildItems = (dates) => {
+  const buildItems = () => {
     /**
      * dates를 itmes 형태로 만들어준다.
      * ['2022-04-05', '2022-04-06']
@@ -198,7 +202,6 @@ const ViewCalendar = () => {
             },
           },
         }}
-        loadItemsForMonth={loadItemsForMonth}
         markedDates={markedDates}
         items={items}
         renderItem={renderItem}
