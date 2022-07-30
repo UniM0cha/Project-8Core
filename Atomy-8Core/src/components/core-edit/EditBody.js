@@ -102,23 +102,30 @@ const Body = () => {
 
   return ready ? (
     <View style={styles.container}>
-      <Shadow viewStyle={styles.coreContainer}>
-        <TextInput
-          style={styles.textInputTitle}
-          placeholder="제목을 입력해주세요."
-          multiline={true}
-          scrollEnabled={false}
-          onChangeText={(text) => setTitle(text)}
-          value={title}
-        />
-        <TextInput
-          style={styles.textInputContent}
-          placeholder="내용을 입력해주세요."
-          multiline={true}
-          scrollEnabled={false}
-          onChangeText={(text) => setContent(text)}
-          value={content}
-        />
+      <Shadow viewStyle={styles.coreContainer} startColor="#00000015">
+        <Shadow viewStyle={styles.textInputTitleShadow} startColor="#00000015">
+          <TextInput
+            style={styles.textInputTitle}
+            placeholder="제목을 입력해주세요."
+            multiline={true}
+            scrollEnabled={false}
+            onChangeText={(text) => setTitle(text)}
+            value={title}
+          />
+        </Shadow>
+        <Shadow
+          viewStyle={styles.textInputContentShadow}
+          startColor="#00000015"
+        >
+          <TextInput
+            style={styles.textInputContent}
+            placeholder="내용을 입력해주세요."
+            multiline={true}
+            scrollEnabled={false}
+            onChangeText={(text) => setContent(text)}
+            value={content}
+          />
+        </Shadow>
       </Shadow>
       <Button title="저장" onPress={addCores} />
     </View>
@@ -143,27 +150,22 @@ const styles = StyleSheet.create({
     marginBottom: 17,
     width: '100%',
   },
+  textInputTitleShadow: {
+    marginBottom: 12,
+    width: '100%',
+  },
+  textInputContentShadow: {
+    width: '100%',
+  },
   textInputTitle: {
     backgroundColor: theme.textInput,
     borderRadius: 15,
     paddingTop: 10,
     paddingBottom: 10,
     paddingHorizontal: 10,
-    marginBottom: 12,
 
     textAlignVertical: 'top',
     fontWeight: 'bold',
-
-    ...Platform.select({
-      ios: {
-        shadowOffset: { width: 0, height: 1 },
-        shadowOpacity: 0.2,
-        shadowRadius: 4,
-      },
-      android: {
-        elevation: 5,
-      },
-    }),
   },
   textInputContent: {
     backgroundColor: theme.textInput,
@@ -174,17 +176,6 @@ const styles = StyleSheet.create({
     minHeight: 100,
 
     textAlignVertical: 'top',
-
-    ...Platform.select({
-      ios: {
-        shadowOffset: { width: 0, height: 1 },
-        shadowOpacity: 0.2,
-        shadowRadius: 4,
-      },
-      android: {
-        elevation: 5,
-      },
-    }),
   },
 });
 
