@@ -25,7 +25,7 @@
       <dict>
         <key>CFBundleURLSchemes</key>
         <array>
-          <string>com.solstice.8core</string>
+          <string>com.solstice.Atomy8core</string>
         </array>
       </dict>
     </array>

@@ -17,7 +17,7 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.solstice.8core",
+      "bundleIdentifier": "com.solstice.Atomy8core",
       "buildNumber": "1"
     },
     "android": {

@@ -57,7 +57,6 @@ const ViewCalendar = () => {
   const today = useContext(TodayContext);
   const todayString = format(today, 'yyyy-MM-dd');
 
-  const [ready, setReady] = useState(false);
   const [markedDates, setMarkedDates] = useState({});
   const [items, setItmes] = useState({});
   const [dates, setDates] = useState({});
@@ -104,10 +103,6 @@ const ViewCalendar = () => {
       newMarkedDates[key] = { marked: true };
     });
     setMarkedDates(newMarkedDates);
-    console.log(`newMarkedDates :`);
-    console.log(newMarkedDates);
-    console.log('markedDates :');
-    console.log(markedDates);
   };
 
   const buildItems = () => {
@@ -127,10 +122,6 @@ const ViewCalendar = () => {
       newItems[key] = data;
     });
     setItmes(newItems);
-    console.log(`newItems :`);
-    console.log(newItems);
-    console.log(`items :`);
-    console.log(items);
   };
 
   const renderItem = (item, firstItemInDay) => {
