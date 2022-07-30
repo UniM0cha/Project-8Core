@@ -6,6 +6,7 @@ import { SafeAreaView, StatusBar, StyleSheet, Text, View } from 'react-native';
 import { Agenda, LocaleConfig } from 'react-native-calendars';
 import { TodayContext } from '../../context/TodayContext';
 import { theme } from '../../theme';
+import Loading from '../Loading';
 import { STORAGE_KEY } from '../main/MainBody';
 import Core from '../main/MainCore';
 
@@ -59,24 +60,23 @@ const ViewCalendar = () => {
   const [ready, setReady] = useState(false);
   const [markedDates, setMarkedDates] = useState({});
   const [items, setItmes] = useState({});
-  const [dates, setDates] = useState({});
+  // const [dates, setDates] = useState({});
 
   const isFocused = useIsFocused();
 
-  useEffect(() => {
-    async function runAsync() {
-      setDates(await loadDates());
-      buildMarkDates();
-      buildItems();
-    }
-    runAsync();
-  }, [isFocused]);
+  const loadItemsForMonth = async () => {
+    const dates = await loadDates();
+    console.log(`dates : `);
+    console.log(dates);
+    buildMarkDates(dates);
+    buildItems(dates);
+  };
 
   // AsyncStorage에서 전체 날짜 리스트를 받아온다.
   const loadDates = async () => {
     const s = await AsyncStorage.getItem(STORAGE_KEY);
     if (s) {
-      return JSON.parse(s);
+      return await JSON.parse(s);
     }
     // 데이터가 없으면 객체를 새로 만든다.
     else {
@@ -84,7 +84,7 @@ const ViewCalendar = () => {
     }
   };
 
-  const buildMarkDates = () => {
+  const buildMarkDates = (dates) => {
     /**
      * dates를 markDates 형태로 만들어준다.
      * ['2022-04-05', '2022-04-06']
@@ -100,9 +100,13 @@ const ViewCalendar = () => {
       newMarkedDates[key] = { marked: true };
     });
     setMarkedDates(newMarkedDates);
+    console.log(`newMarkedDates :`);
+    console.log(newMarkedDates);
+    console.log('markedDates :');
+    console.log(markedDates);
   };
 
-  const buildItems = () => {
+  const buildItems = (dates) => {
     /**
      * dates를 itmes 형태로 만들어준다.
      * ['2022-04-05', '2022-04-06']
@@ -119,6 +123,10 @@ const ViewCalendar = () => {
       newItems[key] = data;
     });
     setItmes(newItems);
+    console.log(`newItems :`);
+    console.log(newItems);
+    console.log(`items :`);
+    console.log(items);
   };
 
   const renderItem = (item, firstItemInDay) => {
@@ -190,15 +198,10 @@ const ViewCalendar = () => {
             },
           },
         }}
-        loadItemsForMonth={buildItems}
+        loadItemsForMonth={loadItemsForMonth}
         markedDates={markedDates}
         items={items}
         renderItem={renderItem}
-        // renderDay={(day, item) => {
-        //   // console.log(day.getDate());
-        //   return <Text>{day ? day.getDate() : 'item'}</Text>;
-        // }}
-        // renderEmptyDate={renderEmptyDate}
         renderEmptyData={renderEmptyData}
         showOnlySelectedDayItems={true}
       />
