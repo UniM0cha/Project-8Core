@@ -64,8 +64,6 @@ const Body = () => {
         [todayString]: cores,
       });
 
-      console.log(cores);
-
       // 모든 코어가 없을 경우 dates도 삭제
       if (Object.keys(cores) == 0) {
         delete dates[todayString];
@@ -84,8 +82,6 @@ const Body = () => {
 
   const saveDates = async (toSave) => {
     await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(toSave));
-    console.log(`saved :`);
-    console.log(toSave);
   };
 
   // AsyncStorage에서 전체 날짜 리스트를 받아온다.

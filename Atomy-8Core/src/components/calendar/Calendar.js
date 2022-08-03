@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useIsFocused } from '@react-navigation/native';
+import { useFocusEffect, useIsFocused } from '@react-navigation/native';
 import { format } from 'date-fns';
-import { useContext, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { SafeAreaView, StatusBar, StyleSheet, Text, View } from 'react-native';
 import { Agenda, LocaleConfig } from 'react-native-calendars';
 import { TodayContext } from '../../context/TodayContext';
@@ -60,20 +60,30 @@ const ViewCalendar = () => {
   const [markedDates, setMarkedDates] = useState({});
   const [items, setItmes] = useState({});
   const [dates, setDates] = useState({});
+  const [itemReady, setItemReady] = useState(false);
+  const [markedDatesReady, setMarkedDatesReady] = useState(false);
 
-  const isFocused = useIsFocused();
-
-  useEffect(() => {
-    async function runAsync() {
-      setDates(await loadDates());
-    }
-    runAsync();
-  }, [isFocused]);
+  useFocusEffect(
+    useCallback(() => {
+      async function runAsync() {
+        setDates(await loadDates());
+      }
+      runAsync();
+    }, [])
+  );
 
   useEffect(() => {
     buildMarkDates();
     buildItems();
   }, [dates]);
+
+  useEffect(() => {
+    setItemReady(true);
+  }, [items]);
+
+  useEffect(() => {
+    setMarkedDatesReady(true);
+  }, [markedDates]);
 
   // AsyncStorage에서 전체 날짜 리스트를 받아온다.
   const loadDates = async () => {
@@ -179,7 +189,7 @@ const ViewCalendar = () => {
     );
   };
 
-  return (
+  return itemReady && markedDatesReady ? (
     <SafeAreaView style={styles.container}>
       <StatusBar />
       <Agenda
@@ -200,6 +210,8 @@ const ViewCalendar = () => {
         showOnlySelectedDayItems={true}
       />
     </SafeAreaView>
+  ) : (
+    <Loading />
   );
 };
 

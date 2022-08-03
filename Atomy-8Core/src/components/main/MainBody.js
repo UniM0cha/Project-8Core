@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useIsFocused } from '@react-navigation/native';
+import { useFocusEffect, useIsFocused } from '@react-navigation/native';
 import { format } from 'date-fns';
-import { useContext, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { TodayContext } from '../../context/TodayContext';
 import Loading from '../Loading';
@@ -18,9 +18,18 @@ const Body = () => {
   const isFocused = useIsFocused();
 
   // 화면으로 포커스가 이동할 때마다 코어들 새로고침
+  useFocusEffect(
+    useCallback(() => {
+      loadCores();
+    }, [])
+  );
+  // useEffect(() => {
+  //   loadCores();
+  // }, [isFocused]);
+
   useEffect(() => {
-    loadCores();
-  }, [isFocused]);
+    setReady(true);
+  }, [cores]);
 
   const loadCores = async () => {
     const s = await AsyncStorage.getItem(STORAGE_KEY);
@@ -29,7 +38,6 @@ const Body = () => {
     } else {
       setCores({});
     }
-    setReady(true);
   };
 
   // 저장된 데이터를 모두 불러오면 표시한다.

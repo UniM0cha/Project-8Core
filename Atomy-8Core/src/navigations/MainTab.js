@@ -1,24 +1,23 @@
 import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
-import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import CoreEditStackNavigation from './CoreEditStack';
 import ViewCalendar from '../components/calendar/Calendar';
-import Profile from '../components/profile/Profile';
-import Settings from '../components/settings/Settings';
 import { theme } from '../theme';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-const Tab = createMaterialBottomTabNavigator();
+const Tab = createBottomTabNavigator();
 
 const TabNavigation = () => {
   return (
     <Tab.Navigator
       initialRouteName="Main"
-      activeColor={theme.atomy}
       barStyle={{ backgroundColor: 'white' }}
     >
       <Tab.Screen
         name="Main"
         component={CoreEditStackNavigation}
         options={{
+          headerShown: false,
+          tabBarActiveTintColor: theme.atomy,
           tabBarLabel: '8코어',
           tabBarIcon: (props) => (
             <MaterialCommunityIcons
@@ -33,6 +32,8 @@ const TabNavigation = () => {
         name="Calender"
         component={ViewCalendar}
         options={{
+          headerShown: false,
+          tabBarActiveTintColor: theme.atomy,
           tabBarLabel: '캘린더',
           tabBarIcon: (props) => (
             <Ionicons
