@@ -11,6 +11,7 @@ const TabNavigation = () => {
     <Tab.Navigator
       initialRouteName="Main"
       barStyle={{ backgroundColor: 'white' }}
+      screenOptions={{ tabBarHideOnKeyboard: true }}
     >
       <Tab.Screen
         name="Main"
