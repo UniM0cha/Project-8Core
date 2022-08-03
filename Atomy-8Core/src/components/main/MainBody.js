@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useFocusEffect, useIsFocused } from '@react-navigation/native';
+import { useFocusEffect } from '@react-navigation/native';
 import { format } from 'date-fns';
 import { useCallback, useContext, useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
@@ -15,17 +15,12 @@ const Body = () => {
   const [cores, setCores] = useState({});
   const [ready, setReady] = useState(false);
 
-  const isFocused = useIsFocused();
-
   // 화면으로 포커스가 이동할 때마다 코어들 새로고침
   useFocusEffect(
     useCallback(() => {
       loadCores();
     }, [])
   );
-  // useEffect(() => {
-  //   loadCores();
-  // }, [isFocused]);
 
   useEffect(() => {
     setReady(true);

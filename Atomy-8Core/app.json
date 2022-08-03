@@ -18,7 +18,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.solstice.Atomy8core",
-      "buildNumber": "1"
+      "buildNumber": "6"
     },
     "android": {
       "versionCode": 6,

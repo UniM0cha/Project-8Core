@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useFocusEffect, useIsFocused } from '@react-navigation/native';
+import { useFocusEffect } from '@react-navigation/native';
 import { format } from 'date-fns';
 import { useCallback, useContext, useEffect, useState } from 'react';
 import { SafeAreaView, StatusBar, StyleSheet, Text, View } from 'react-native';
@@ -137,46 +137,14 @@ const ViewCalendar = () => {
   const renderItem = (item, firstItemInDay) => {
     return (
       <View style={styles.renderItem}>
-        <Core
-          core={1}
-          data={item.cores ? item.cores[1] : null}
-          readonly={true}
-        />
-        <Core
-          core={2}
-          data={item.cores ? item.cores[2] : null}
-          readonly={true}
-        />
-        <Core
-          core={3}
-          data={item.cores ? item.cores[3] : null}
-          readonly={true}
-        />
-        <Core
-          core={4}
-          data={item.cores ? item.cores[4] : null}
-          readonly={true}
-        />
-        <Core
-          core={5}
-          data={item.cores ? item.cores[5] : null}
-          readonly={true}
-        />
-        <Core
-          core={6}
-          data={item.cores ? item.cores[6] : null}
-          readonly={true}
-        />
-        <Core
-          core={7}
-          data={item.cores ? item.cores[7] : null}
-          readonly={true}
-        />
-        <Core
-          core={8}
-          data={item.cores ? item.cores[8] : null}
-          readonly={true}
-        />
+        <Core core={1} data={item.cores ? item.cores[1] : null} readonly />
+        <Core core={2} data={item.cores ? item.cores[2] : null} readonly />
+        <Core core={3} data={item.cores ? item.cores[3] : null} readonly />
+        <Core core={4} data={item.cores ? item.cores[4] : null} readonly />
+        <Core core={5} data={item.cores ? item.cores[5] : null} readonly />
+        <Core core={6} data={item.cores ? item.cores[6] : null} readonly />
+        <Core core={7} data={item.cores ? item.cores[7] : null} readonly />
+        <Core core={8} data={item.cores ? item.cores[8] : null} readonly />
       </View>
     );
   };

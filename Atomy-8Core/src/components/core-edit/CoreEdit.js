@@ -1,14 +1,18 @@
-import { SafeAreaView, ScrollView, StatusBar, StyleSheet } from 'react-native';
+import { SafeAreaView, StatusBar, StyleSheet } from 'react-native';
 import Body from './EditBody';
 import { theme } from '../../theme';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 const CoreEdit = () => {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar />
-      <ScrollView style={styles.scroll}>
+      <KeyboardAwareScrollView
+        style={styles.scroll}
+        keyboardShouldPersistTaps="handled"
+      >
         <Body />
-      </ScrollView>
+      </KeyboardAwareScrollView>
     </SafeAreaView>
   );
 };

@@ -2,7 +2,13 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { format } from 'date-fns';
 import { useContext, useEffect, useState } from 'react';
-import { Button, StyleSheet, TextInput, View } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import { Shadow } from 'react-native-shadow-2';
 import { TodayContext } from '../../context/TodayContext';
 import { theme } from '../../theme';
@@ -123,7 +129,12 @@ const Body = () => {
           />
         </Shadow>
       </Shadow>
-      <Button title="저장" onPress={addCores} />
+      {/* <Button title="저장" onPress={addCores} /> */}
+      <TouchableOpacity onPress={addCores}>
+        <Shadow viewStyle={styles.saveButtonShadow} startColor="#00000015">
+          <Text style={styles.saveButtonText}>저장</Text>
+        </Shadow>
+      </TouchableOpacity>
     </View>
   ) : (
     <Loading />
@@ -172,6 +183,19 @@ const styles = StyleSheet.create({
     minHeight: 100,
 
     textAlignVertical: 'top',
+  },
+  saveButtonShadow: {
+    // backgroundColor: 'white',
+    backgroundColor: theme.atomy,
+    borderRadius: 15,
+    alignSelf: 'stretch',
+  },
+  saveButtonText: {
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    textAlign: 'center',
+    color: 'white',
+    fontFamily: 'Atomy-Bold',
   },
 });
 
