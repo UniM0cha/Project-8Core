@@ -1,4 +1,4 @@
-rootProject.name = '8코어'
+rootProject.name = '8Core'
 
 apply from: new File(["node", "--print", "require.resolve('expo/package.json')"].execute(null, rootDir).text.trim(), "../scripts/autolinking.gradle");
 useExpoModules()
