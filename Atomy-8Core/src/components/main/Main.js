@@ -44,7 +44,7 @@ const Main = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar />
+      <StatusBar backgroundColor="white" barStyle="dark-content" />
       <ScrollView style={styles.scroll}>
         {/* 캡쳐할 부분 시작*/}
         <ViewShot ref={viewshotRef} style={styles.viewshot}>
