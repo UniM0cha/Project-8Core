@@ -4,7 +4,7 @@ import { theme } from '../../theme';
 const Settings = () => {
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar />
+      <StatusBar backgroundColor="white" barStyle="dark-content" />
       <Text>현재 페이지는 준비중입니다.</Text>
     </SafeAreaView>
   );

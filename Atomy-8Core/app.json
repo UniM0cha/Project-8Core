@@ -2,9 +2,9 @@
   "expo": {
     "name": "8Core",
     "slug": "Atomy-8Core",
-    "version": "1.1.4",
+    "version": "1.1.5",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/icon2.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
@@ -18,7 +18,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.solstice.Atomy8core",
-      "buildNumber": "7"
+      "buildNumber": "8"
     },
     "android": {
       "versionCode": 7,

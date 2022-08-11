@@ -159,7 +159,7 @@ const ViewCalendar = () => {
 
   return itemReady && markedDatesReady ? (
     <SafeAreaView style={styles.container}>
-      <StatusBar />
+      <StatusBar backgroundColor="white" barStyle="dark-content" />
       <Agenda
         monthFormat={'yyyy년 MMMM'}
         theme={{

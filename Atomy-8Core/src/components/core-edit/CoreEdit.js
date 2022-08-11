@@ -6,7 +6,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 const CoreEdit = () => {
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar />
+      <StatusBar backgroundColor="white" barStyle="dark-content" />
       <KeyboardAwareScrollView
         style={styles.scroll}
         keyboardShouldPersistTaps="handled"
