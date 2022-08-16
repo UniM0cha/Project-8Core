@@ -1,39 +1,31 @@
-import { useEffect, useState } from 'react';
+import { parse } from 'date-fns';
+import { useContext, useEffect, useState } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
-import { theme } from '../../theme';
-import Loading from '../Loading';
+import SelectedDateContext from '../context/SelectedDateContext';
+import { theme } from '../theme';
 
-const Header = () => {
-  const [date, setDate] = useState({});
-  const [ready, setReady] = useState(false);
+const CoreHeader = () => {
+  const { selectedDate, setSelectedDate } = useContext(SelectedDateContext);
+  const [date, setDate] = useState(new Date());
 
   useEffect(() => {
-    const today = new Date();
-    today.setHours(0);
-    today.setMinutes(0);
-    today.setSeconds(0);
-    today.setMilliseconds(0);
-    setDate(today);
-    setReady(true);
-  }, []);
+    setDate(parse(selectedDate, 'yyyy-MM-dd', new Date()));
+  }, [selectedDate]);
 
-  return ready ? (
+  return (
     <View style={styles.container}>
       <Text style={styles.textYear}>{date.getFullYear()}년</Text>
       <Text style={styles.textDay}>
         {date.getMonth() + 1}월 {date.getDate()}일
       </Text>
     </View>
-  ) : (
-    <Loading />
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 28,
-    paddingTop: 16,
+    paddingBottom: 16,
   },
   textYear: {
     fontFamily: 'Atomy-Bold',
@@ -47,4 +39,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Header;
+export default CoreHeader;

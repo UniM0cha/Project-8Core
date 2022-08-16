@@ -16,6 +16,7 @@ import {
 } from 'react-native-google-mobile-ads';
 import SelectedDateContext from '../context/SelectedDateContext';
 import * as Sharing from 'expo-sharing';
+import CoreHeader from './CoreHeader';
 
 LocaleConfig.locales['kr'] = {
   monthNames: [
@@ -80,6 +81,7 @@ const Calendar = () => {
 
   const getPhotoUri = async () => {
     const uri = await captureRef(viewshotRef, {
+      fileName: selectedDate,
       format: 'jpg',
       quality: 0.8,
     });
@@ -164,15 +166,16 @@ const Calendar = () => {
 
   const renderItem = (item, firstItemInDay) => {
     return (
-      <>
+      <ScrollView>
         <ViewShot ref={viewshotRef} style={styles.renderItem}>
+          <CoreHeader />
           <CoreList item={item} />
         </ViewShot>
         <ShareButton onPress={onCapture} />
         <View style={styles.ad}>
           <BannerAd unitId={adUnitId} size={BannerAdSize.BANNER} />
         </View>
-      </>
+      </ScrollView>
     );
   };
 
@@ -180,6 +183,7 @@ const Calendar = () => {
     return (
       <ScrollView>
         <ViewShot ref={viewshotRef} style={styles.renderItem}>
+          <CoreHeader />
           <CoreList />
         </ViewShot>
         <ShareButton onPress={onCapture} />
@@ -192,7 +196,7 @@ const Calendar = () => {
 
   return itemReady && markedDatesReady ? (
     <Agenda
-      monthFormat={'yyyy년 MM월'}
+      monthFormat="yyyy-MM"
       theme={{
         'stylesheet.calendar.header': {
           week: {
@@ -211,7 +215,6 @@ const Calendar = () => {
       onDayPress={(date) => {
         setSelectedDate(date.dateString);
       }}
-      selected={selectedDate}
     />
   ) : (
     <Loading />
@@ -228,6 +231,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingTop: 22,
     paddingBottom: 0,
+    backgroundColor: '#F2F4F5',
   },
   renderEmptyData: {
     flex: 1,
