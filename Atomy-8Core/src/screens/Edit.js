@@ -1,16 +1,15 @@
-import { SafeAreaView, StatusBar, StyleSheet, Text } from 'react-native';
-import { theme } from '../../theme';
+import { SafeAreaView, StatusBar, StyleSheet } from 'react-native';
+import { theme } from '../theme';
+import CoreEdit from '../components/CoreEdit';
 
-const Profile = () => {
+const Edit = () => {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar backgroundColor="white" barStyle="dark-content" />
-      <Text>현재 페이지는 준비중입니다.</Text>
+      <CoreEdit />
     </SafeAreaView>
   );
 };
-
-export default Profile;
 
 const styles = StyleSheet.create({
   container: {
@@ -20,3 +19,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+export default Edit;

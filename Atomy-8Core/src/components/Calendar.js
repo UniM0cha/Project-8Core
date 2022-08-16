@@ -1,14 +1,21 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFocusEffect } from '@react-navigation/native';
-import { format } from 'date-fns';
-import { useCallback, useContext, useEffect, useState } from 'react';
-import { SafeAreaView, StatusBar, StyleSheet, Text, View } from 'react-native';
+import { useCallback, useContext, useEffect, useRef, useState } from 'react';
+import { ScrollView, StyleSheet, View } from 'react-native';
 import { Agenda, LocaleConfig } from 'react-native-calendars';
-import { TodayContext } from '../../context/TodayContext';
-import { theme } from '../../theme';
-import Loading from '../Loading';
-import { STORAGE_KEY } from '../main/MainBody';
-import Core from '../main/MainCore';
+import { theme } from '../theme';
+import Loading from './Loading';
+import { STORAGE_KEY } from '../global_variables';
+import ShareButton from './ShareButton';
+import CoreList from './CoreList';
+import ViewShot, { captureRef } from 'react-native-view-shot';
+import {
+  BannerAd,
+  BannerAdSize,
+  TestIds,
+} from 'react-native-google-mobile-ads';
+import SelectedDateContext from '../context/SelectedDateContext';
+import * as Sharing from 'expo-sharing';
 
 LocaleConfig.locales['kr'] = {
   monthNames: [
@@ -53,15 +60,36 @@ LocaleConfig.locales['kr'] = {
 };
 LocaleConfig.defaultLocale = 'kr';
 
-const ViewCalendar = () => {
-  const today = useContext(TodayContext);
-  const todayString = format(today, 'yyyy-MM-dd');
+const adUnitId = __DEV__
+  ? TestIds.BANNER
+  : Platform.select({
+      ios: 'ca-app-pub-7177226656845371/2933124133',
+      android: 'ca-app-pub-7177226656845371/4469567088',
+    });
+
+const Calendar = () => {
+  const { selectedDate, setSelectedDate } = useContext(SelectedDateContext);
 
   const [markedDates, setMarkedDates] = useState({});
   const [items, setItmes] = useState({});
   const [dates, setDates] = useState({});
   const [itemReady, setItemReady] = useState(false);
   const [markedDatesReady, setMarkedDatesReady] = useState(false);
+
+  const viewshotRef = useRef();
+
+  const getPhotoUri = async () => {
+    const uri = await captureRef(viewshotRef, {
+      format: 'jpg',
+      quality: 0.8,
+    });
+    return `file://${uri}`;
+  };
+
+  const onCapture = async () => {
+    const uri = await getPhotoUri();
+    await Sharing.shareAsync(uri);
+  };
 
   useFocusEffect(
     useCallback(() => {
@@ -136,48 +164,55 @@ const ViewCalendar = () => {
 
   const renderItem = (item, firstItemInDay) => {
     return (
-      <View style={styles.renderItem}>
-        <Core core={1} data={item.cores ? item.cores[1] : null} readonly />
-        <Core core={2} data={item.cores ? item.cores[2] : null} readonly />
-        <Core core={3} data={item.cores ? item.cores[3] : null} readonly />
-        <Core core={4} data={item.cores ? item.cores[4] : null} readonly />
-        <Core core={5} data={item.cores ? item.cores[5] : null} readonly />
-        <Core core={6} data={item.cores ? item.cores[6] : null} readonly />
-        <Core core={7} data={item.cores ? item.cores[7] : null} readonly />
-        <Core core={8} data={item.cores ? item.cores[8] : null} readonly />
-      </View>
+      <>
+        <ViewShot ref={viewshotRef} style={styles.renderItem}>
+          <CoreList item={item} />
+        </ViewShot>
+        <ShareButton onPress={onCapture} />
+        <View style={styles.ad}>
+          <BannerAd unitId={adUnitId} size={BannerAdSize.BANNER} />
+        </View>
+      </>
     );
   };
 
   const renderEmptyData = () => {
     return (
-      <View style={styles.renderEmptyData}>
-        <Text>해당 날짜에 8코어를 작성하지 않았습니다.</Text>
-      </View>
+      <ScrollView>
+        <ViewShot ref={viewshotRef} style={styles.renderItem}>
+          <CoreList />
+        </ViewShot>
+        <ShareButton onPress={onCapture} />
+        <View style={styles.ad}>
+          <BannerAd unitId={adUnitId} size={BannerAdSize.BANNER} />
+        </View>
+      </ScrollView>
     );
   };
 
   return itemReady && markedDatesReady ? (
-    <SafeAreaView style={styles.container}>
-      <StatusBar backgroundColor="white" barStyle="dark-content" />
-      <Agenda
-        monthFormat={'yyyy년 MMMM'}
-        theme={{
-          'stylesheet.calendar.header': {
-            week: {
-              marginTop: 5,
-              flexDirection: 'row',
-              justifyContent: 'space-around',
-            },
+    <Agenda
+      monthFormat={'yyyy년 MM월'}
+      theme={{
+        'stylesheet.calendar.header': {
+          week: {
+            marginTop: 5,
+            flexDirection: 'row',
+            justifyContent: 'space-around',
           },
-        }}
-        markedDates={markedDates}
-        items={items}
-        renderItem={renderItem}
-        renderEmptyData={renderEmptyData}
-        showOnlySelectedDayItems={true}
-      />
-    </SafeAreaView>
+        },
+      }}
+      markedDates={markedDates}
+      items={items}
+      renderItem={renderItem}
+      renderDay={() => null}
+      renderEmptyData={renderEmptyData}
+      showOnlySelectedDayItems={true}
+      onDayPress={(date) => {
+        setSelectedDate(date.dateString);
+      }}
+      selected={selectedDate}
+    />
   ) : (
     <Loading />
   );
@@ -187,9 +222,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: theme.background,
-  },
-  renderDay: {
-    backgroundColor: 'tomato',
   },
   renderItem: {
     flex: 1,
@@ -202,6 +234,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  ad: {
+    alignItems: 'center',
+  },
 });
 
-export default ViewCalendar;
+export default Calendar;
