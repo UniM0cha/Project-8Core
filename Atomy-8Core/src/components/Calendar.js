@@ -215,6 +215,7 @@ const Calendar = () => {
       onDayPress={(date) => {
         setSelectedDate(date.dateString);
       }}
+      selected={selectedDate}
     />
   ) : (
     <Loading />

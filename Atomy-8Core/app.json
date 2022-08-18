@@ -2,14 +2,14 @@
   "expo": {
     "name": "8Core",
     "slug": "Atomy-8Core",
-    "version": "1.2.0",
+    "version": "1.2.1",
     "orientation": "portrait",
     "icon": "./assets/icon2.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
-      "resizeMode": "cover",
-      "backgroundColor": "#00B5EC"
+      "resizeMode": "contain",
+      "backgroundColor": "#3DB6ED"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -18,10 +18,10 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.solstice.Atomy8core",
-      "buildNumber": "9"
+      "buildNumber": "10"
     },
     "android": {
-      "versionCode": 9,
+      "versionCode": 10,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
