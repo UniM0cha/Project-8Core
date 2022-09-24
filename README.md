@@ -60,6 +60,7 @@
 * 2022년 9월 24일 기준 : 설치한 사용자 38명<br>
   <img width="1196" alt="image" src="https://user-images.githubusercontent.com/77760474/192082537-924b6f53-438a-44fd-9eef-487497c0c60c.png">
   <h3>revenue</h3>
+* 2022년 9월 24일 기준 : 29.58달러<br>
   <img width="600" alt="image" src="https://user-images.githubusercontent.com/77760474/192081933-914d1d1f-7366-4aeb-abd8-3ad319dcfa01.png">
   
 </div>
