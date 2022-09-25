@@ -1,13 +1,10 @@
 # Project-8Core
-
-애터미 8코어 앱을 만들기 위한 레포지토리
-
 프로젝트 Notion 주소 : https://solstice99.notion.site/Project_8Core-7327832de47d42a7851d72ebb3bba562
 
 
 <div align="center">
   <h1>- 애터미 8코어 - 8가지 성공습관 -</h1>
-  2학년 여름방학 개인 프로젝트 <br>
+  3학년 여름방학 개인 프로젝트 <br>
   2022. 6. 25. ~ 2021. 8. 7. <br> <br>
   <img src="https://img.shields.io/badge/React Native-0.68-gray?logo=react&logoColor=black&labelColor=61DAFB&style=for-the-badge"/>
   <img src="https://img.shields.io/badge/Android-gray?logo=android&logoColor=black&labelColor=3DDC84&style=for-the-badge"/>
